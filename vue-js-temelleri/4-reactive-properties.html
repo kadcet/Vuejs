@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    
+    <!-- v-on metod ve fonksiyonları tetikler. eylem gerçekleştirir.
+     v-on:   yerine @  kullanılabilir -->
+    <div id="app">
+        <input type="text" v-model="age">
+        <p> Javascript : {{age >= 18 ? "Reşit" : "Değil"}}</p>
+        <!-- metodtan gelen değeri biryere yazdıracaksam return kullan. p nin içindede () kullan -->
+        <p> Method : {{ageWriter()}}</p>
+        <!-- computed e yazılan metodun sonucu gösterirken () KULLANMA -->
+        <p> Computed : {{ageWriterComp}}</p>
+        <hr>
+        <p>{{sayi}}</p>
+        <button @click="sayi++">Sayı Arttır</button>
+    </div>
+    <!-- 57:12 -->
+
+    <script>
+        const app= Vue.createApp({
+       data(){
+        return{
+            age:0,
+            sayi:0
+        }
+       },
+       methods: {
+        // metodtan gelen değeri biryere yazdıracaksam return kullan. p nin içindede () kullan
+        ageWriter(){
+            console.log("Method Çalıştı")
+            return this.age>=18 ? "Reşit" : "Değil"
+        }
+       },
+
+       computed : {
+         ageWriterComp(){
+            console.log("computed çalıştı")
+            return this.age>=18 ? "Reşit" : "Değil"
+         }
+       },
+
+    //    önceki değerle yeni değeri gösteriyor. Bu 2 veriyle uğraşacaksak kullanılır
+       watch : {
+        age(newValue,oldValue){
+            console.log("new",newValue)
+            console.log("old",oldValue)
+        }
+       }
+
+
+}).mount("#app");
+    </script>
+</body>
+</html>

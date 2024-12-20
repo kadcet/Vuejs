@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    
+    <!-- v-bind:[attribute] => attribut için kullanılır class,id,href,value,src,style
+     attributeden önce : kullanılarakta yapılabilir
+     :href     :src     :value gibi     -->
+    <div id="app">
+        <h3>{{title}}</h3>
+        <button>{{buttonTitle}}</button>
+        <p>{{paragraph}}</p>
+        <p v-text="paragraph"></p>
+        <a v-bind:href="link" v-bind:data-id="dataId">Youtube Sitesine Git</a> <br>
+        <a :href="link" :data-id="dataId">Youtube Sitesine Git</a>
+        <p v-html="details"></p>
+    </div>
+
+    <script>
+        const app= Vue.createApp({
+data(){
+    return {
+        title:"test başık",
+        buttonTitle:"Tıkla Gelsin",
+        paragraph:"lorem impus dolor sit amet",
+        link:"https://www.youtube.com",
+        dataId:"1",
+        details:"<b> Bu bir haber detayıdır.....</b>"
+    };
+}
+
+
+}).mount("#app");
+    </script>
+</body>
+</html>

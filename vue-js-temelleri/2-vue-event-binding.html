@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    
+    <!-- v-on metod ve fonksiyonları tetikler. eylem gerçekleştirir.
+     v-on:   yerine @  kullanılabilir -->
+    <div id="app">
+        <!-- <input type="text" v-on:keypress="keyp($event)"> -->
+        <input type="text" @keypress="keyp($event)">
+        <!-- <button v-on:click="arttir()">Arttır</button> -->
+        <button @click="arttir">Arttır</button>
+        <p v-text="sayi"></p>
+        <p>{{sayi}}</p>
+    </div>
+
+    <script>
+        const app= Vue.createApp({
+data(){
+    return {
+        sayi:0,
+        
+    };
+},
+methods: {
+    arttir(){
+        this.sayi++;
+        
+    },
+    keyp(gelenEvent){
+        if(gelenEvent.keyCode==13)
+        this.sayi+= parseInt(gelenEvent.target.value)
+    }
+    
+}
+
+
+}).mount("#app");
+    </script>
+</body>
+</html>

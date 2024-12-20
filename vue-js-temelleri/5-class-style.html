@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            border: 1px solid#666;
+            background-color: #fbbd08;
+            margin-bottom: 10px;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- v-on metod ve fonksiyonları tetikler. eylem gerçekleştirir.
+     v-on:   yerine @  kullanılabilir -->
+    <div id="app">
+        <div class="box" :class="className"></div>
+        <!-- eğer showblue true ise blue classını ekle    computede taşıdık -->
+        <div class="box" :class="className"></div>
+        <!-- direkt style ekleyebiliyoruz -->
+        <div class="box" :style="{'background-color':'black'}"></div>
+        <!-- false ise true olacak, true ise false olacak -->
+        <button @click="showBlue= !showBlue">Ekle/Kaldır</button>
+    </div>
+    <!-- 1:05 -->
+
+    <script>
+        const app= Vue.createApp({
+       data(){
+        return{
+            showBlue:false
+        }
+       },
+
+       computed : {
+        className(){
+            return{
+                'blue' : this.showBlue
+            };
+        }
+       }
+       
+}).mount("#app");
+    </script>
+</body>
+</html>

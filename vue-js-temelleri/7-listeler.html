@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+
+        ul {
+            margin: 0px;
+            margin-top: 10px;
+            padding: 0px;
+            list-style: none;
+            width: 300px;
+        }
+        li {
+            padding: 5px 50px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid#ccc;
+            text-align: left;
+        }
+        
+        .red{
+            background-color: coral;
+        }
+
+        .green{
+            background-color: limegreen;
+        }
+    </style>
+</head>
+<body>
+    
+    
+    <div id="app">
+
+        <!-- burda 10 kadar yaptık.Listeyi yazdırmadık -->
+        <ul>
+            <li v-for="item in 10">{{item}}</li>
+        </ul>
+
+
+        <ul>
+            <li v-for="item in list">{{item}}</li>
+        </ul>
+
+        <!--  v-text ilede yapabiliriz -->
+        <ul>
+            <li v-for="i in list" v-text="i"></li>
+        </ul>
+        <hr>
+
+
+        <div v-for="(value, key) in personel">
+           {{key +" "+value}}
+        </div>
+
+        <div v-for="(value, key) in personel">
+            <strong>{{key}}</strong> <span>{{value}}</span>
+         </div>
+
+         <hr>
+
+
+         Adet:<input type="text" v-model="sellCount">
+         <ul>
+            <div v-for="product in productList" :class="backgroundByCount(product)">
+                <li>
+                    <span>{{product.title}} - {{product.count}}</span>
+                    <button :disabled="product.count==0" @click="sellProduct(product)">Satıldı</button>
+                </li>
+            </div>
+         </ul>
+         <p v-if="sellWarning" style="color: red; font-weight:bold ;">Girdiğiniz miktar stok adetlerinden fazladır</p>
+
+    </div>
+
+    <script>
+        const app= Vue.createApp({
+data(){
+    return {
+
+        sellCount:0,
+        sellWarning:false,
+
+        list:["Elma","Armut","Kiraz"],
+
+        personel :{
+            name:"gökhan",
+            lastName:"kandemir",
+            email:"gokhan@gkandemir.com"
+        },
+
+        productList : [
+            {
+                title : "MacBook Pro",
+                price:100,
+                count :0
+            },
+            {
+                title : "İphone",
+                price:50,
+                count :100
+            },
+            {
+                title : "Klavye",
+                price:10,
+                count :1000
+            }
+        ],
+    }
+},
+methods:{
+    sellProduct(product){
+        if(this.sellCount > product.count){
+            this.sellWarning=true
+        } else{
+            product.count=product.count-this.sellCount
+            this.sellWarning=false
+        }
+        
+    },
+
+    backgroundByCount(product){
+        return {'green' : product.count > 0, 'red' : product.count <=0}
+    }
+},
+computed :{
+    
+}
+
+}).mount("#app");
+    </script>
+</body>
+</html>
